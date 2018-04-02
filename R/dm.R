@@ -1,6 +1,6 @@
 #' dm
 #'
-#' Hayashi Source: Stock, J., and M. Watson, 1993, "A Simple Estimator of Cointegrating Vectors in Higher Order Integrated Systems," Econometrics, 61, 783-820.
+#' Hayashi Source: Bekaert, G., and R. Hodrick, 1993, "On Biases in the Measurement of Foreign Exchange Risk Premiums," Journal of International Money and Finance, 12, 115-138.
 #'
 #' A time series data set at weekly frequency of the US Dollar / Deutsche Mark exchange rate. Data period is January 1975 to November 1989.
 #'
