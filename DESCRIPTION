@@ -1,0 +1,11 @@
+Package: hayashir
+Title:  Data Sets from "Econometrics" by Fumio Hayashi
+Version: 0.0.0.9000
+Authors@R: person("Lachlan", "Deer", email = "lachlan.deer@gmail.com", role = c("aut", "cre"))
+Maintainer: Lachlan Deer <lachlan.deer@gmail.com>
+Description: What the package does (one paragraph).
+Depends: R (>= 3.4.3)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+BugReports: https://github.com/lachlandeer/hayashir/issues
