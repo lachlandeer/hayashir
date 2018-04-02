@@ -10,7 +10,7 @@
 #'
 #' @usage data('greene')
 #'
-#' @format A data.frame with 99 observations on 8 variables:
+#' @format A data.frame with 99 observations on 9 variables:
 #' \itemize{
 #'  \item \strong{firm_id:} The firm ID (row number) from Nerlove's 1955 sample
 #'  \item \strong{total_cost:} total cost in 1970 of supply in millions of dollars
