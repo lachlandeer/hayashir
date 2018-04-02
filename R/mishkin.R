@@ -2,9 +2,9 @@
 #'
 #' Hayashi Source: Mishkin, F., 1992, "Is the Fisher Effect for Real?'Journal of Monetary Economics, 30, 195-215.
 #'
-#' A cross-sectional data set on 145 firms in 44 states in the year 1955 with data on total costs, factor prices (the wage rate, the price of fuel, and the rental price of capital), and output of power plants.
+#' A time series data set monthly data set used on the one-month T-bill rate and the monthly inflation, stated in percent at annual rates.
 #'
-#' @section Notes: Used in Section 7 of Chapter 1, the Empirical Exercise of Chapter 1, Empirical Exercise 2 in Chapter 2.
+#' @section Notes: Used in Section 11 of Chapter 2 and Empirical Exercise 1 of Chapter 2.
 #'
 #' @docType data
 #'
