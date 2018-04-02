@@ -4,7 +4,7 @@
 #'
 #' A cross-sectional data set on 99 firms in the year 1970 with data on total costs, factor prices (the wage rate, the price of fuel, and the rental price of capital), cost shares and output of power plants
 #'
-#' @section Notes: Used in Section 4.7 and the Empirical Exercise of Chapter 4.
+#' @section Notes: Used in Chapter 4.7 and the Empirical Exercise of Chapter 4.
 #'
 #' @docType data
 #'
