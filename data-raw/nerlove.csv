@@ -1,4 +1,4 @@
-TC,Q,PL,PF,PK
+total_cost,output,price_labor,price_fuel,price_capital
 0.082,2,2.09,17.9,183
 0.661,3,2.05,35.1,174
 0.99,4,2.05,35.1,171
