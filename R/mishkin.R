@@ -2,7 +2,7 @@
 #'
 #' Hayashi Source: Mishkin, F., 1992, "Is the Fisher Effect for Real?'Journal of Monetary Economics, 30, 195-215.
 #'
-#' A time series data set monthly data set used on the one-month T-bill rate and the monthly inflation, stated in percent at annual rates.
+#' A time series data set at monthly frequency of the one-month T-bill rate and the monthly inflation, stated in percent at annual rates.
 #'
 #' @section Notes: Used in Section 11 of Chapter 2 and Empirical Exercise 1 of Chapter 2.
 #'
