@@ -71,5 +71,7 @@ pwt <- clean_data %>%
                 country_name = stringr::str_trim(country_name, side = "both")
             )
 
+readr::write_csv(pwt, "data-raw/pwt.csv")
+devtools::use_data(pwt, overwrite = TRUE, compress = 'xz')
 
 
