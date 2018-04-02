@@ -4,7 +4,7 @@
 #'
 #' A cross-sectional data set on 145 firms in 44 states in the year 1955 with data on total costs, factor prices (the wage rate, the price of fuel, and the rental price of capital), and output of power plants.
 #'
-#' @section Notes: Used in Section 7 of Chapter 1 and the Empirical Exercise of Chapter 1.
+#' @section Notes: Used in Section 7 of Chapter 1, the Empirical Exercise of Chapter 1, Empirical Exercise 2 in Chapter 2.
 #'
 #' @docType data
 #'
