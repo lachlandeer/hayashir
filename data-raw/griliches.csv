@@ -1,4 +1,4 @@
-RNS,RNS80,MRT,MRT80,SMSA,SMSA80,MED,IQ,KWW,YEAR,AGE,AGE80,S,S80,EXPR,EXPR80,TENURE,TENURE80,LW,LW80
+southern_residence,southern_residence_80,married,married_80,lives_metro,lives_metro_80,mothers_educ,iq_score,kww_score,year,age,age_80,education,education_80,experience,experience_80,tenure,tenure_80,log_wage,log_wage_80
 0,0,0,1,1,1,8,93,35,68,19,31,12,12,0.462,10.635,0,2,5.9,6.645
 0,0,0,1,1,1,14,119,41,66,23,37,16,18,0,11.367,2,16,5.438,6.694
 0,0,0,1,1,1,14,108,46,67,20,33,14,14,0.423,11.035,1,9,5.71,6.715
