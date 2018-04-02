@@ -4,7 +4,7 @@
 #'
 #' A time series data set at annual frequency of the US dollar / UK Sterling exchange rate and annual wholesale price indices.
 #'
-#' @section Notes: Used in Chapter 9.6 and Empirical Exercise 1 of Chapter 2.
+#' @section Notes: Used in Chapter 9.6 and the Empirical Exercise of Chapter 9.
 #'
 #' @docType data
 #'
