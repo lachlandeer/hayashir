@@ -1,6 +1,6 @@
 #' mishkin
 #'
-#' Hayashi Source: Nerlove, M., 1963, “Returns to Scale in Electricity Supply,” in C. Christ (ed.), Measurement in Economics: Studies in Mathematical Economics and Econometrics in Memory of Yehuda Grunfeld, Stanford: Stanford University Press.
+#' Hayashi Source: Mishkin, F., 1992, "Is the Fisher Effect for Real?'Journal of Monetary Economics, 30, 195-215.
 #'
 #' A cross-sectional data set on 145 firms in 44 states in the year 1955 with data on total costs, factor prices (the wage rate, the price of fuel, and the rental price of capital), and output of power plants.
 #'
