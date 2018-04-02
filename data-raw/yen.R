@@ -1,6 +1,7 @@
 # process yen.xls data
 
 library(readxl)
+library(dplyr)
 
 yen <- read_excel("data-raw/yen.xls") %>%
             rename(date = DATE,
