@@ -17,3 +17,6 @@ rhub::check_on_centos()
 
 rhub::check_with_valgrind()
 rhub::check_with_sanitizers()
+
+#
+devtools::build_win()

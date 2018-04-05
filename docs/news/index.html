@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>pwt — pwt • hayashir</title>
+<title>Changelog • hayashir</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,9 +25,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-<meta property="og:title" content="pwt — pwt" />
-
-<meta property="og:description" content="Hayashi Source: Summers, R., and A. Heston, 1991, 'The Penn World Table (Mark 5): An Expanded Set of International Comparisons, 1950-1988," Quarterly Journal of Economics, 106,327-368." />
+<meta property="og:title" content="Changelog" />
 
 <meta property="og:image" content="http://lachlandeer.github.io/hayashir/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -47,7 +45,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -98,70 +96,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>pwt</h1>
-    <small>Source: <a href='https://github.com/lachlandeer/hayashir/blob/master/R/pwt.R'><code>R/pwt.R</code></a></small>
-    <div class="hidden name"><code>pwt.Rd</code></div>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/lachlandeer/hayashir/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    
-    <p>Hayashi Source: Summers, R., and A. Heston, 1991, 'The Penn World Table (Mark 5): An Expanded Set of International Comparisons, 1950-1988," Quarterly Journal of Economics, 106,327-368.</p>
-    
-
-    <pre class="usage"><span class='fu'>data</span>(<span class='st'>'pwt'</span>)</pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A data.frame with 3250 observations on 8 variables:</p><ul>
-<li><p><strong>country_id:</strong> a numeric identifier for each country</p></li>
-<li><p><strong>communist:</strong> = TRUE if country has communist government</p></li>
-<li><p><strong>opec_member:</strong> = TRUE if country is an OPEC member</p></li>
-<li><p><strong>year:</strong> year</p></li>
-<li><p><strong>population:</strong> population ('000s)</p></li>
-<li><p><strong>real_gdp_capita:</strong> real GDP per capita (in 1980 US Dollars)</p></li>
-<li><p><strong>savings_rate:</strong> savings rate, in percent</p></li>
-<li><p><strong>country_name:</strong> name of the country</p></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p><a href='https://sites.google.com/site/fumiohayashi/hayashi-econometrics/data-for-empirical'>https://sites.google.com/site/fumiohayashi/hayashi-econometrics/data-for-empirical</a></p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>A panel data set on 125 countries over 26 years covering macroeconomic variables. Known as the Penn World Table, or the Summers-Heston data.</p>
-    
-    <h2 class="hasAnchor" id="notes"><a class="anchor" href="#notes"></a>Notes</h2>
-
-    <p>Used in the Empirical Exercise of Chapter 5.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'> <span class='fu'>str</span>(<span class='no'>pwt</span>)</div><div class='output co'>#&gt; 'data.frame':	3250 obs. of  8 variables:
-#&gt;  $ country_id     : int  1 1 1 1 1 1 1 1 1 1 ...
-#&gt;  $ communist      : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
-#&gt;  $ opec_member    : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
-#&gt;  $ year           : num  1960 1961 1962 1963 1964 ...
-#&gt;  $ population     : num  10800 11016 11236 11460 11690 ...
-#&gt;  $ real_gdp_capita: int  1723 1599 1275 1517 1589 1584 1548 1600 1758 1835 ...
-#&gt;  $ savings_rate   : num  19.9 21.1 15 13.9 10.6 11 8.3 11.3 15.1 18.2 ...
-#&gt;  $ country_name   : chr  "algeria" "algeria" "algeria" "algeria" ...</div></pre>
+    <div id="hayashir-0-1-0" class="section level1">
+<h1 class="page-header">
+<a href="#hayashir-0-1-0" class="anchor"></a>hayashir 0.1.0</h1>
+<p>First version of hayashi data package containing 10 data sets and documentation.</p>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#source">Source</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#notes">Notes</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#hayashir-0-1-0">0.1.0</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
       <footer>
