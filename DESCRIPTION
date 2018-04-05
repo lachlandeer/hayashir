@@ -12,7 +12,7 @@ Description: Graduate students new to both PhD level econometrics and **R** may
     and documentation for each data set is included. Once the package is 
     installed and loaded, all data are ready to use with minimal fuss.
 Depends: R (>= 3.4.3)
-License: GPL-3 + file LICENSE
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 BugReports: https://github.com/lachlandeer/hayashir/issues
