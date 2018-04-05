@@ -1,4 +1,7 @@
 # hayashir: `R` Companion for "Econometrics" by Fumio Hayashi
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/hayashir)](https://cran.r-project.org/package=hayashir)
+[![Travis-CI Build Status](https://travis-ci.org/lachlandeer/hayashir.svg?branch=master)](https://travis-ci.org/lachlandeer/hayashir)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lachlandeer/hayashir?branch=master&svg=true)](https://ci.appveyor.com/project/lachlandeer/hayashir)
 
 <img src="man/figures/logo.png" align="right" width="25%"/>
 
