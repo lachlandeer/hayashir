@@ -1,12 +1,12 @@
 library(testthat)
-pkg_name <- basename(here::here())
+pkg_name <- basename(getwd())
 
-data_folder <- here::here("data")
+data_folder <- paste0(getwd(),"//data")
 
 test_that("Do any files exist in /data that are not .RData files?", {
 
   expect_equal(length(list.files(data_folder)),
-               length(list.files(data_folder, pattern = "*.RData$")))
+               length(list.files(data_folder, pattern = "\\.RData$")))
 })
 
 
