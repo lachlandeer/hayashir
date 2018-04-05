@@ -1,14 +1,20 @@
-# hayashir: 10 Data Sets for "Econometrics" by Fumio Hayashi 
+# hayashir: `R` Companion for "Econometrics" by Fumio Hayashi
 
-Graduate students new to both PhD level econometrics and **R** may find the introduction to both challenging. One major challenge can be finding the empirical data to complete a Problem Set and then loading it into **R**.
+Graduate students new to both PhD level econometrics and **R** may find the introduction to both challenging.
+One major challenge can be finding the empirical data to complete a Problem Set and then loading it into **R**.
 
-The `hayashir` data package intends to lighten the load on Graduate Student and users of Hayashi's text "Econometrics". The package contains documentation for each data set and all data used in the book is included. Once the package is installed and loaded, all data sets are ready to use, with minimal fuss.
+The `hayashir` data package intends to lighten the load on readers of Hayashi's text "Econometrics" who want to follow the empirical parts of the text using `R`.
+The package contains all data used in the book and  documentation for each data set is included.
+Once the package is installed and loaded, all data are ready to use with minimal fuss.
 
 ## Installation
 
-The `hayashir` package can be installed using the package `devtools.` After installing `devtools`, `hayashir` is installed by entering:
+The `hayashir` package can be installed using the package `devtools.`
+After installing `devtools`, `hayashir` is installed by entering:
 
 ```{r}
+# install devtools if not already installed
+# install.packages(devtools)
 devtools::install_github("lachlandeer/hayashir")
 ```
 
