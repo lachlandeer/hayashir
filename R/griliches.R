@@ -20,7 +20,7 @@
 #' \item \strong{lives_metro_80:} = 1 if individual lives in metropolitan area in 1980
 #' \item \strong{mothers_educ:} mother's education measured in years
 #' \item \strong{iq_score:} score on the IQ test
-#' \item \strong{kww_score:} score on "Knowlegde of the World of Work" test
+#' \item \strong{kww_score:} score on "Knowledge of the World of Work" test
 #' \item \strong{year:} year was first interviewed
 #' \item \strong{age:} age of individual when first interviewed
 #' \item \strong{age_80:} age of individual in 1980
@@ -30,7 +30,7 @@
 #' \item \strong{experience_80:} years of work experience in 1980
 #' \item \strong{tenure:} years of tenure when first interviewed
 #' \item \strong{tenure_80:} years of tenure in 1980
-#' \item \strong{log_wage:} log wage when first interviewd
+#' \item \strong{log_wage:} log wage when first interviewed
 #' \item \strong{log_wage_80:} log wage in 1980
 #' }
 #' @source \url{https://sites.google.com/site/fumiohayashi/hayashi-econometrics/data-for-empirical}

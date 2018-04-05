@@ -7,7 +7,7 @@
 \format{A data.frame with 3250 observations on 8 variables:
 \itemize{
  \item \strong{country_id:} a numeric identifier for each country
- \item \strong{communist:} = TRUE if country has communist goverment
+ \item \strong{communist:} = TRUE if country has communist government
  \item \strong{opec_member:} = TRUE if country is an OPEC member
  \item \strong{year:} year
  \item \strong{population:} population ('000s)

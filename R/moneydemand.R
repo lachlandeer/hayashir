@@ -15,7 +15,7 @@
 #'  \item \strong{log_m1:} natural log of M1 money supply
 #'  \item \strong{log_p:} natural log of net national product (NNP) price deflator
 #'  \item \strong{log_nnp:} natural log of net national product
-#'  \item \strong{interest_rate:} commerical paper rate, annualized in percent
+#'  \item \strong{interest_rate:} commercial paper rate, annualized in percent
 #' }
 #' @source \url{https://sites.google.com/site/fumiohayashi/hayashi-econometrics/data-for-empirical}
 #' @examples  str(moneydemand)
