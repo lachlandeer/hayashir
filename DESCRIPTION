@@ -9,7 +9,7 @@ Description: Graduate students new to both PhD level econometrics and **R** may
     into **R**. The `hayashir` data package intends to lighten the load on
     readers of Hayashi's "Econometrics" who want to follow the empirical
     parts of the text using `R`. The package contains all data used in the book
-    and documentation for each data set is included. Once the package is 
+    and documentation for each data set is included. Once the package is
     installed and loaded, all data are ready to use with minimal fuss.
 Depends: R (>= 3.4.3)
 License: MIT + file LICENSE
@@ -17,3 +17,4 @@ Encoding: UTF-8
 LazyData: true
 BugReports: https://github.com/lachlandeer/hayashir/issues
 RoxygenNote: 6.0.1
+URL: http://lachlandeer.github.io/hayashir, https://github.com/lachlandeer/hayashir
