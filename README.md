@@ -1,4 +1,5 @@
-# hayashir: `R` Companion for "Econometrics" by Fumio Hayashi
+# hayashir: `R` Companion for "Econometrics" by Fumio Hayashi <img src="man/figures/hayashir.png" align="right" />
+
 
 Graduate students new to both PhD level econometrics and **R** may find the introduction to both challenging.
 One major challenge can be finding the empirical data to complete a Problem Set and then loading it into **R**.
