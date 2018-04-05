@@ -17,4 +17,5 @@ Encoding: UTF-8
 LazyData: true
 BugReports: https://github.com/lachlandeer/hayashir/issues
 RoxygenNote: 6.0.1
+Suggests: testthat
 URL: http://lachlandeer.github.io/hayashir, https://github.com/lachlandeer/hayashir

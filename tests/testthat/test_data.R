@@ -1,4 +1,4 @@
-
+library(testthat)
 pkg_name <- basename(here::here())
 
 data_folder <- here::here("data")
