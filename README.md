@@ -1,6 +1,6 @@
 # hayashir: `R` Companion for "Econometrics" by Fumio Hayashi
 
-<img src="man/figures/hayashir.png" align="right" width="35%"/>
+<img src="man/figures/hayashir.png" align="right" width="25%"/>
 
 
 Graduate students new to both PhD level econometrics and **R** may find the introduction to both challenging.
