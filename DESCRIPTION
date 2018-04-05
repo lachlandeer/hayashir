@@ -1,5 +1,5 @@
 Package: hayashir
-Title: 10 Data Sets for "Econometrics" by Fumio Hayashi
+Title: R Companion to "Econometrics" by Fumio Hayashi
 Version: 0.0.0.9000
 Authors@R: person("Lachlan", "Deer", email = "lachlan.deer@gmail.com", role = c("aut", "cre"))
 Maintainer: Lachlan Deer <lachlan.deer@gmail.com>
