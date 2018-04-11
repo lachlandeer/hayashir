@@ -1,10 +1,10 @@
 ---
-title: "Chapter 01"
+title: "Chapter 01: Finite Sample Properties of OLS"
 author: "Lachlan Deer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Chapter 01}
+  %\VignetteIndexEntry{Chapter 01: Finite Sample Properties}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
