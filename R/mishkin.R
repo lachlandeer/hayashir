@@ -1,4 +1,4 @@
-#' mishkin
+#' mishkin: T-Bill and Inflation Rates in the United States.
 #'
 #' Hayashi Source: Mishkin, F., 1992, "Is the Fisher Effect for Real?'Journal of Monetary Economics, 30, 195-215.
 #'

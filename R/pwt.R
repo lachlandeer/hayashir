@@ -1,4 +1,4 @@
-#' pwt
+#' pwt: Extract of the Penn World Table.
 #'
 #' Hayashi Source: Summers, R., and A. Heston, 1991, 'The Penn World Table (Mark 5): An Expanded Set of International Comparisons, 1950-1988," Quarterly Journal of Economics, 106,327-368.
 #'

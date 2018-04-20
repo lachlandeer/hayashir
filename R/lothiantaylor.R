@@ -1,4 +1,4 @@
-#' lothiantaylor
+#' lothiantaylor: Historical USD - Sterling Exchange Rates.
 #'
 #' Hayashi Source: Lothian, J., and M. Taylor, 1996, "Real Exchange Rate Behavior: The Recent Float from the Perspective of the Past Two Centuries," Journal of Political Economy, 104,488-509.
 #'
