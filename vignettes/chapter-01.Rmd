@@ -27,8 +27,8 @@ library(hayashir)
 
 Let's get a quick look at our data by looking at the first 10 rows:
 
-```{r, results='asis'}
-knitr::kable(head(nerlove, 10))
+```{r}
+head(nerlove, 10)
 ```
 
 Some information about the variables in the data can be found in the documentation:
@@ -55,9 +55,10 @@ skim(nerlove)
 
 ## Testing Homogeneity of the cost function
 
-### Unrestricted
+### The Unrestricted Model
 ```{r}
-unrestricted_ls <- log(total_cost ) ~ log(output ) + log(price_labor ) + log(price_capital ) + log(price_fuel)
+unrestricted_ls <- log(total_cost) ~ log(output) + 
+                    log(price_labor) + log(price_capital) + log(price_fuel)
 
 model1 <- lm(unrestricted_ls, data = nerlove)
 summary(model1)
@@ -71,54 +72,63 @@ print(return_to_scale)
 ```
 
 t-stat:
+The `car` package provides the `linearHypothesis` package which provides an easy way to test linear hypotheses:
 ```{r}
 library(car)
 
-linearHypothesis(model1, c("log(price_capital) = 0" ))
+linearHypothesis(model1, c("log(price_capital) = 0"))
 
 # relationship between t and F = F = t^2
-
-test_results <- linearHypothesis(model1, c("log(price_capital) = 0" ))
+test_results <- linearHypothesis(model1, c("log(price_capital) = 0"))
 
 # ie. same as above
 t_stat <- sqrt(test_results$F)
 
 ```
 
-## Restricted Model
+### The Restricted Model
 
 Following the book:
 ```{r}
-restricted_ls <- log(total_cost /price_fuel) ~ log(output) + log(price_labor / price_fuel) + log(price_capital / price_fuel) 
+restricted_ls <- log(total_cost/price_fuel) ~ log(output) +
+                        log(price_labor/price_fuel) + log(price_capital / price_fuel) 
 
 model2 <- lm(restricted_ls, data = nerlove)
 summary(model2)
 ```
+
+Next, Hayashi provides a routine to compute the F-stat to test the restriction.
+First, we proceed as he instructs:
 
 We can find SSR from the `anova function:`
 ```{r}
 anova(model1)
 ```
 
-We need to get SSR_u from model 1 and the denominator df:
+We need to get SSR_u from model 1 and the denominator df.  The `anova()` function returns a `data.frame` from which we need to extract:
+    
+1. the SSR -  located in the last row of the `Sum_Sq` column
+2. The degress of freedom - located in the last row of the `Df` column
+
+To get them:
 ```{r}
 anova_model1 <- anova(model1)
-nrow(anova_model1)
+final_row_u <- nrow(nrow(anova_model1))
 
-SSR_u <- anova_model1$`Sum Sq`[nrow(anova_model1)]
-df_resid_u <- anova_model1$Df[nrow(anova_model1)]
+SSR_u <- anova_model1$`Sum Sq`[final_row_u]
+df_resid_u <- anova_model1$Df[final_row_u]
 ```
 
-and for the restricted model:
+and doing the same for the for the restricted model:
 ```{r}
 anova_model2 <- anova(model2)
-nrow(anova_model2)
+final_row_r <- nrow(nrow(anova_model2))
 
-SSR_r <- anova_model2$`Sum Sq`[nrow(anova_model2)]
-df_resid_r <- anova_model2$Df[nrow(anova_model2)]
+SSR_r <- anova_model2$`Sum Sq`[final_row_r]
+df_resid_r <- anova_model2$Df[final_row_r]
 ```
 
-Then our F-stat is:
+Then our F-stat can be computed as:
 ```{r}
 f_stat <- ( (SSR_r - SSR_u) / (df_resid_r - df_resid_u)) / (SSR_u / (df_resid_u))
 print(paste("F stat is:", f_stat))
@@ -130,13 +140,17 @@ pf(f_stat, df_resid_r - df_resid_u, df_resid_u, lower.tail = FALSE)
 ```
 
 
-Alternatively the critical value at 5% is
+Alternatively, we can look at the F-stat versus a critical value.#
+The critical value at 5% is
 ```{r}
 qf(0.05, df_resid_r - df_resid_u, df_resid_u, lower.tail = FALSE)
 ```
 
-### Easier way!
-That was all kind of *complicated* ... a simpler version would be using the `linearHypothesis` function from above by specifying the restriction we want to impose
+## Testing Restrictions in an Easier way
+
+Though instructive, that was kind of *complicated* ... 
+a simpler version would be using the `linearHypothesis` function that we have already seen. 
+We specifying the restriction we want to impose:
 
 ```{r}
 linearHypothesis(model1, "log(price_labor) + log(price_capital) + log(price_fuel) = 1")
@@ -145,7 +159,8 @@ linearHypothesis(model1, "log(price_labor) + log(price_capital) + log(price_fuel
 ## Detour: a cautionary note on $R^2$
 
 ```{r}
-scale_effect <- log(total_cost / output) ~ log(output ) + log(price_labor ) + log(price_capital ) + log(price_fuel)
+scale_effect <- log(total_cost / output) ~ log(output ) + 
+                    log(price_labor ) + log(price_capital ) + log(price_fuel)
 
 model3 <- lm(scale_effect, data = nerlove)
 summary(model3)
@@ -170,7 +185,10 @@ print(paste("t stat is:", t_stat2))
 ```
 
 ## Importance of plotting residuals
-
+The `car` package again helps us. 
+`car` comes with a function `residualPlot` which will plot residuals 
+    against fitted values (by default),
+or against a specified variable, in our case `log(output)`
 ```{r, fig.height= 6, fig.width=6}
 # residual plot comes from car package
 residualPlot(model2, variable = "log(output)")
