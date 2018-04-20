@@ -1,4 +1,4 @@
-#' moneydemand: Money Supply during the 20th Century.
+#' Money Supply during the 20th Century.
 #'
 #' Hayashi Source: Stock, J., and M. Watson, 1993, "A Simple Estimator of Cointegrating Vectors in Higher Order Integrated Systems," Econometrics, 61, 783-820.
 #'

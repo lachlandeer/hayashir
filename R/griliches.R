@@ -1,4 +1,4 @@
-#' griliches: Extract of the NLS-Y data.
+#' Extract of the NLS-Y data.
 #'
 #' Hayashi Source: Blackburn, M., and D. Neumark, 1992, "Unobserved Ability, Efficiency Wages, and Interindustry Wage Differentials," Quarterly Journal of Economics, 107, 142 1-1436.
 #'

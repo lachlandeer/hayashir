@@ -3,7 +3,7 @@
 \docType{data}
 \name{mishkin}
 \alias{mishkin}
-\title{mishkin}
+\title{T-Bill and Inflation Rates in the United States.}
 \format{A data.frame with 491 observations on 7 variables:
 \itemize{
  \item \strong{year:} year

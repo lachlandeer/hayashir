@@ -3,7 +3,7 @@
 \docType{data}
 \name{nerlove}
 \alias{nerlove}
-\title{nerlove}
+\title{Electricity Supply Data from 1955.}
 \format{A data.frame with 145 observations on 5 variables:
 \itemize{
  \item \strong{total_cost:} total cost of supply in millions of dollars

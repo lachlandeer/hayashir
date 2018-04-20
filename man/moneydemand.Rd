@@ -3,7 +3,7 @@
 \docType{data}
 \name{moneydemand}
 \alias{moneydemand}
-\title{moneydemand}
+\title{Money Supply during the 20th Century.}
 \format{A data.frame with 90 observations on 4 variables:
 \itemize{
  \item \strong{log_m1:} natural log of M1 money supply

@@ -1,4 +1,4 @@
-#' dm: USD/Deutschemark Exchange Rates over time.
+#' USD/Deutschemark Exchange Rates over time.
 #'
 #' Hayashi Source: Bekaert, G., and R. Hodrick, 1993, "On Biases in the Measurement of Foreign Exchange Risk Premiums," Journal of International Money and Finance, 12, 115-138.
 #'

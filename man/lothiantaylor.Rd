@@ -3,7 +3,7 @@
 \docType{data}
 \name{lothiantaylor}
 \alias{lothiantaylor}
-\title{lothiantaylor}
+\title{Historical USD - Sterling Exchange Rates.}
 \format{A data.frame with 200 observations on 4 variables:
 \itemize{
  \item \strong{year:} year

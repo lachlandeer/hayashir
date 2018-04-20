@@ -3,7 +3,7 @@
 \docType{data}
 \name{greene}
 \alias{greene}
-\title{greene}
+\title{Electricity Supply Data from 1970.}
 \format{A data.frame with 99 observations on 9 variables:
 \itemize{
  \item \strong{firm_id:} The firm ID (row number) from Nerlove's 1955 sample
