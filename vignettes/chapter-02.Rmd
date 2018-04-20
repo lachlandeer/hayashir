@@ -1,0 +1,139 @@
+---
+title: "Chapter 02 -"
+author: "Lachlan Deer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Load Libraries
+```{r}
+library(hayashir)
+library(ggplot2)
+library(dplyr)
+library(zoo)
+```
+
+
+## Inspecting the Data
+
+```{r}
+head(mishkin)
+```
+
+
+## Figure 2.3
+First we construct a date variable and then calculate CPI inflation
+The library `zoo` contains the function `as.yearmon()` 
+    to construct dates containing only year and months.
+```{r}
+
+mishkin2 <- mishkin %>%
+                mutate(time_period = as.yearmon(paste(year, month, sep = "-")),
+                       cpi_inflation = (cpi/lag(cpi) - 1) * 100 * 12
+                       )
+                
+
+```
+
+Now we plot the data:
+
+```{r, warning = FALSE, fig.height= 6, fig.width=6}
+ggplot(mishkin2) +
+    geom_line(aes(time_period, tbill_1, linetype = "tbill_1")) +
+    geom_line(aes(time_period, cpi_inflation, linetype = "cpi_inflation")) +
+    xlab("Date") +
+    ylab("percent") +
+    theme_bw() + 
+    theme(legend.position="bottom") +
+    scale_linetype_manual(name = element_blank(), 
+                          values = c(tbill_1 = "solid", cpi_inflation = "dotted"),
+                          labels = c("inflation rate", "1 month T-bill rate")
+                          )
+```
+
+## Figure 2.4
+
+Compute real interest rate:
+```{r}
+mishkin2 <- mishkin2 %>%
+                mutate(real_rate = tbill_1 - cpi_inflation)
+
+```
+
+And now plot:
+```{r, fig.height= 6, fig.width=6}
+ggplot(mishkin2) +
+    geom_line(aes(time_period, real_rate, linetype = "tbill_1")) +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+    xlab("Date") +
+    ylab("percent") +
+    theme_bw() + 
+    theme(legend.position="none")
+```
+
+## Table 2.1
+First we subset the data.
+The relevant Date range is January 1953 to July 1971.
+
+```{r}
+fama <- mishkin2 %>%
+            filter(between(as.yearmon(time_period), 
+                           as.yearmon("Jan 1953"), 
+                           as.yearmon("Jul 1971")
+                           )
+                   )
+
+```
+
+```{r}
+library(skimr)
+skim(fama$real_rate)
+```
+Then the ACF
+```{r}
+acf(fama$real_rate, lag.max = 12, plot = FALSE)
+```
+
+Then the Ljung Box Q tests (use the `portes` package for more flexibility)
+
+```{r}
+library(portes)
+```
+
+```{r}
+LjungBox(fama$real_rate, lags = seq(1, 12))
+```
+
+## Is the Nominal Interest Rate the Optimal Predictor?
+
+```{r}
+model1 <- lm(cpi_inflation ~ tbill_1, data = fama)
+summary(model1)
+```
+
+### How to get robust standard errors?
+
+```{r}
+library(sandwich)
+library(lmtest)
+
+coeftest(model1, vcov = vcovHC(model1, "HC0")) # white's
+```
+
+
+```{r}
+library(car)
+
+linearHypothesis(model1, "tbill_1 = 1", white.adjust = "hc0")
+```
