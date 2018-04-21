@@ -1,0 +1,83 @@
+---
+title: "Chapter 03: Single Equation GMM"
+author: "Lachlan Deer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Loading Libraries
+
+```{r, warning = FALSE}
+library(hayashir)
+library(dplyr)
+library(stargazer)
+library(AER)
+
+```
+
+## Inspecting the data
+
+```{r}
+str(griliches)
+
+```
+
+## Table 3.1
+
+```{r, results = 'asis'}
+
+to_summarize <- griliches %>%
+                    select(age, education, log_wage, kww_score, iq_score, experience)
+
+stargazer(as.data.frame(to_summarize), type = "html")
+
+```
+Notice that because we are using the Blackburn-Neumark data rather than copying the data from Griliches directly we get slightly different results.
+
+## Table 3.2
+
+First we estimate the three models.
+We again expect slightly different results because (i) 
+   we have different data than Griliches; and 
+   (ii) the controls are slightly different - due to data availability.
+
+```{r}
+model1 <- lm(log_wage ~ education + 
+                 experience + tenure +
+                 southern_residence + lives_metro + 
+                 age + I(age)^2 + married, 
+                 data = griliches)
+model2 <- lm(log_wage ~ education + iq_score + 
+                 experience + tenure +
+                 southern_residence + lives_metro + 
+                 age + I(age)^2 + married, 
+                 data = griliches)
+model3 <- ivreg(log_wage ~ education + iq_score + 
+                     experience + tenure +
+                     southern_residence + lives_metro +  
+                     age + I(age)^2 + married | 
+                     . -iq_score + kww_score + mothers_educ,
+                    data = griliches)
+```
+
+Let's put them all into a table:
+
+```{r, results = 'asis'}
+
+stargazer(model1, model2, model3, type = "html",
+          keep = c("education", "iq_score", "experience",
+                   "tenure")
+          )
+
+```
