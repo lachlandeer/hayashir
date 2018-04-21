@@ -3,7 +3,7 @@
 \docType{data}
 \name{griliches}
 \alias{griliches}
-\title{griliches}
+\title{Extract of the NLS-Y data.}
 \format{A data.frame with 758 observations on 20 variables:
 \itemize{
 \item \strong{southern_residence:} = 1 if individual lives in southern state when first interviewed

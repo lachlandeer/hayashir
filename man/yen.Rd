@@ -3,12 +3,12 @@
 \docType{data}
 \name{yen}
 \alias{yen}
-\title{yen}
+\title{USD/JPY Exchange Rates over time.}
 \format{A data.frame with 778 observations on 4 variables:
 \itemize{
  \item \strong{date:} date of the observation
  \item \strong{spot_rate:} the ask price of the US Dollar in units of the Japanese Yen in the spot market on Friday of the current week,
- \item \strong{forward_30:} the ask price of the US Dollar in units of the Japanese Yen in the 30-day forward market on Friday of the current week (F,)
+ \item \strong{forward_30:} the ask price of the US Dollar in units of the Japanese Yen in the 30-day forward market on Friday of the current week
  \item \strong{spot_30:} : the bid price of the US Dollar in units of the Japanese Yen in the spot market on the delivery date on a current forward contract
 }}
 \source{

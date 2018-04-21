@@ -1,4 +1,4 @@
-#' greene
+#' Electricity Supply Data from 1970.
 #'
 #' Hayashi Source: Christensen, L., and W. Greene, 1976, "Economies of Scale in U.S. Electric Power Generation," Journal of Political Economy, 84, 655476.
 #'

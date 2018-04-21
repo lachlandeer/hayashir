@@ -3,7 +3,7 @@
 \docType{data}
 \name{pwt}
 \alias{pwt}
-\title{pwt}
+\title{Extract of the Penn World Table.}
 \format{A data.frame with 3250 observations on 8 variables:
 \itemize{
  \item \strong{country_id:} a numeric identifier for each country

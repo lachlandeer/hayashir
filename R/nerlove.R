@@ -1,4 +1,4 @@
-#' nerlove
+#' Electricity Supply Data from 1955.
 #'
 #' Hayashi Source: Nerlove, M., 1963, “Returns to Scale in Electricity Supply,” in C. Christ (ed.), Measurement in Economics: Studies in Mathematical Economics and Econometrics in Memory of Yehuda Grunfeld, Stanford: Stanford University Press.
 #'
