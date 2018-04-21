@@ -1,6 +1,6 @@
 Package: hayashir
 Title: R Companion to "Econometrics" by Fumio Hayashi
-Version: 0.1.0
+Version: 0.1.0.9090
 Authors@R: person("Lachlan", "Deer", email = "lachlan.deer@gmail.com", role = c("aut", "cre"))
 Maintainer: Lachlan Deer <lachlan.deer@gmail.com>
 Description: Graduate students new to both PhD level econometrics and **R** may

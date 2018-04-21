@@ -56,7 +56,10 @@
       <a href="../articles/chapter-01.html">Chapter 01: Finite Sample Properties of OLS</a>
     </li>
     <li>
-      <a href="../articles/test-vignette.html">Vignette Title</a>
+      <a href="../articles/chapter-02.html">Chapter 02: Large Sample Theory</a>
+    </li>
+    <li>
+      <a href="../articles/chapter-03.html">Chapter 03: Single Equation GMM</a>
     </li>
   </ul>
 </li>
@@ -86,7 +89,7 @@
       <h1>Chapter 01: Finite Sample Properties of OLS</h1>
                         <h4 class="author">Lachlan Deer</h4>
             
-            <h4 class="date">2018-04-20</h4>
+            <h4 class="date">2018-04-21</h4>
       
       <small>Source: <a href="https://github.com/lachlandeer/hayashir/blob/master/vignettes/chapter-01.Rmd"><code>vignettes/chapter-01.Rmd</code></a></small>
       <div class="hidden name"><code>chapter-01.Rmd</code></div>
@@ -210,9 +213,9 @@ test_results &lt;-<span class="st"> </span><span class="kw"><a href="http://www.
 <span class="co"># ie. same as above</span>
 t_stat &lt;-<span class="st"> </span><span class="kw">sqrt</span>(test_results<span class="op">$</span>F)</code></pre></div>
 </div>
-<div id="the-restricted-model-model" class="section level3">
+<div id="the-restricted-model" class="section level3">
 <h3 class="hasAnchor">
-<a href="#the-restricted-model-model" class="anchor"></a>The Restricted Model Model</h3>
+<a href="#the-restricted-model" class="anchor"></a>The Restricted Model</h3>
 <p>Following the book:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">restricted_ls &lt;-<span class="st"> </span><span class="kw">log</span>(total_cost<span class="op">/</span>price_fuel) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(output) <span class="op">+</span>
 <span class="st">                        </span><span class="kw">log</span>(price_labor<span class="op">/</span>price_fuel) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_capital <span class="op">/</span><span class="st"> </span>price_fuel) 
