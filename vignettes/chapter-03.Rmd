@@ -56,28 +56,29 @@ We again expect slightly different results because (i)
 model1 <- lm(log_wage ~ education + 
                  experience + tenure +
                  southern_residence + lives_metro + 
-                 age + I(age)^2 + married, 
+                 age + I(age^2) + married, 
                  data = griliches)
 model2 <- lm(log_wage ~ education + iq_score + 
                  experience + tenure +
                  southern_residence + lives_metro + 
-                 age + I(age)^2 + married, 
+                 age + I(age^2) + married, 
                  data = griliches)
 model3 <- ivreg(log_wage ~ education + iq_score + 
                      experience + tenure +
                      southern_residence + lives_metro +  
-                     age + I(age)^2 + married | 
+                     age + I(age^2) + married | 
                      . -iq_score + kww_score + mothers_educ,
                     data = griliches)
 ```
 
-Let's put them all into a table:
+Let's put them all into a table, we use Std Errors in parentheses,
+    *not t-stats*:
 
 ```{r, results = 'asis'}
 
 stargazer(model1, model2, model3, type = "html",
           keep = c("education", "iq_score", "experience",
-                   "tenure")
+                  "tenure")
           )
 
 ```
