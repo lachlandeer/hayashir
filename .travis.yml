@@ -4,13 +4,11 @@ language: R
 sudo: false
 cache: packages
 
-env:
-  global:
-    - R_CHECK_ARGS="--no-build-vignettes --no-manual --timings"
-
 branches:
   only:
   - master
+
+r_check_args: "--no-vignettes"
 
 r_github_packages:
   - jimhester/covr
