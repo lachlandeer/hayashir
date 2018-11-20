@@ -1,0 +1,148 @@
+---
+title: "Chapter 04: Multiple Equation GMM"
+author: "Lachlan Deer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Chapter 01: Finite Sample Properties}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Application: Returns to Scale in Electricity Supply 
+
+Load the `hayashir` package
+```{r}
+library(hayashir)
+```
+
+And other libraries we need for this chapter
+```{r}
+library(skimr) # summary stats
+library(dplyr) # data manipulation
+library(systemfit) # for fitting system of regressions
+```
+
+## The Data
+
+Let's get a quick look at our data by looking at the first 10 rows:
+
+```{r}
+head(greene, 10)
+```
+
+## Table 4.3: Summary Statistics
+
+```{r}
+# assign the greene data to the object 'df'
+df <- greene
+
+df %>%
+    mutate(output = output / 1e3) %>%
+    select(output, labor_share, capital_share, fuel_share) %>%
+    skim()
+```
+
+## Table 4.4: Regression parameters from 2 regression set up
+
+Following the text, the two equations we want to estimate are:
+
+First, specify the equations we want to estimate:
+
+```{r}
+eq1 <- labor_share ~ log(price_labor / price_fuel) + log(price_capital / price_fuel) + log(output) 
+eq2 <- capital_share ~ log(price_labor / price_fuel) + log(price_capital / price_fuel) + log(output)
+```
+
+As Hayashi tells us, the unique symmetry restriction is then
+```{r}
+restrict <- c(
+    "labor_log(price_capital/price_fuel) = capital_log(price_labor/price_fuel)"
+)
+```
+
+We estimate with the `systemfit` function from the package with the same name:
+
+```{r}
+sur_results <- systemfit(list(labor = eq1, capital = eq2), 
+                         method = "SUR", 
+                         restrict.matrix = restrict,
+                         data= df)
+summary(sur_results)
+```
+
+Which yields approximately the same coefficients as in the text.
+
+Then we can calculate estimates of the remaining coefficients using adding up restrictions, homogeneity and symmetry.
+For example:
+$$
+\hat{\gamma}_{33} = \hat{\gamma}_{11} + 2 \hat{\gamma}_{12} + \hat{\gamma}_{22}
+$$
+
+So that
+```{r}
+gamma_11 <- sur_results$coefficients["labor_log(price_labor/price_fuel)"]
+gamma_12 <- sur_results$coefficients["labor_log(price_capital/price_fuel)"]
+gamma_22 <- sur_results$coefficients["capital_log(price_capital/price_fuel)"]
+
+gamma_33 <- gamma_11 + 2 * gamma_12 + gamma_22
+
+print(paste("gamma_33 is: ", round(gamma_33,3)))
+```
+
+### Getting the Covariance Matrix, $\Sigma$ py pooled OLS
+
+Run the three regressions via pooled OLS.
+The equations are:
+
+```{r}
+eq1a <- labor_share ~ log(price_labor) + log(price_capital) + log(price_fuel) + log(output) 
+eq2a <- capital_share ~ log(price_labor) + log(price_capital) + log(price_fuel) + log(output)
+eq3a <- fuel_share ~ log(price_labor) + log(price_capital) + log(price_fuel) + log(output)
+```
+
+Then estimate:
+```{r}
+pooled_ols <- systemfit(list(labor = eq1a, capital = eq2a, fuel = eq3a), 
+                         method = "OLS", 
+                         data= df)
+summary(pooled_ols)
+```
+
+And extract the residual covariance matrix:
+
+```{r}
+pooled_ols$residCov
+```
+
+## Table 4.5: Substitution Elasticities
+
+The cross elasticity (from eq 4.7.9) is:
+
+$$
+\eta_{jk} = \frac{\gamma_{jk} + s_j s_k}{s_j s_k}
+$$
+
+So we calculate these for each data point, and then find the mean in our data.
+Let's do this for the labor-capital elasticity, $\eta_{12}$:
+
+```{r}
+# the coefficient we are after
+gamma_12 <- sur_results$coefficients["labor_log(price_capital/price_fuel)"]
+
+# the fitted values
+fitted_vals <- fitted( sur_results)
+
+elasticity <- fitted_vals %>%
+    mutate(eta_12 = (gamma_12 + (labor * capital)) / (labor * capital) ) %>%
+    summarise(eta_12 = mean(eta_12)) 
+
+print(paste0("Capital-Labor elasticity is: ", round(elasticity$eta_12, 2)))
+```
