@@ -1,0 +1,115 @@
+---
+title: "Chapter 06: Serial Correlation"
+author: "Lachlan Deer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Chapter 01: Finite Sample Properties}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Application: Forward Exchange Rates as Optimal Predictors 
+
+Load the `hayashir` package
+```{r}
+library(hayashir)
+```
+
+And other libraries we need for this chapter
+```{r}
+library(dplyr) # data manipulation
+library(ggplot2) # plotting
+library(forecast) # time series plotting - Acf
+library(sandwich) # HAC standard errors
+library(lmtest)   
+```
+
+## The Data
+
+Let's get a quick look at our data by looking at the first 10 rows:
+
+```{r}
+head(yen, 10)
+```
+
+## Figure 6.1: Forecast Error: Yen/Dollar
+
+```{r}
+
+ggplot(data = yen, aes(x = date, y = spot_30 - forward_30))+
+    geom_line() +
+    geom_hline(yintercept = 0, linetype="dashed", color = "red") +
+    theme_bw()
+
+```
+
+
+## Figure 6.2: Correlogram of $s30 - f$, Yen/Dollar 
+
+The `Acf` function from the `forecast` package will do what we need here:
+
+```{r}
+Acf(yen$spot_30 - yen$forward_30, lag.max = 40)
+```
+
+
+## Figure 6.3: Yen/Dollar Spot Rate, Jan 1975 - Dec 1989
+
+```{r}
+ggplot(data = yen, aes(x = date, y = spot_rate))+
+    geom_line() +
+    scale_x_date(date_breaks = "3 years", date_labels =  "%m/%y") +
+    theme_bw()
+```
+
+## Figure 6.4: Plot of $s30$ against $f$, Yen/Dollar
+
+```{r}
+ggplot(data = yen, aes(x = log(forward_30), y = log(spot_30)))+
+    geom_point() +
+    theme_bw()
+```
+
+## Table 6.2: Regression Tests for Market Efficiency
+
+For the Yen/Dollar:
+
+```{r}
+mkt_eff <- lm (I(spot_30 - spot_rate) ~ I(forward_30 - spot_rate), data = yen)
+
+summary(mkt_eff)
+
+```
+
+These results give standard errors under the assumption of heteroskedasticity. 
+To correct for heteroskedasticity and autocorrelation we want HAC standard errors from the `sandwich` package.
+In particular standard errors with a maximum of 4 lags that are not pre-whitened.
+To get a summary of the regression we use the `coeftest` function from the `lm` package
+
+```{r}
+coeftest(mkt_eff, vcov = vcovHAC(mkt_eff, lag = 4, prewhite = FALSE))
+```
+
+To test that $\beta_0 =0$ and $\beta_1 = 1$ we use the linearHypothesis function from `car`
+
+```{r}
+linearHypothesis(mkt_eff, c("(Intercept) = 0", "I(forward_30 - spot_rate) = 1"),
+                 vcov = vcovHAC(mkt_eff, lag = 4, prewhite = FALSE))
+```
+
+## Figure 6.5: Plot of $s30-s$ against $f - s$, Yen/Dollar
+
+```{r}
+ggplot(data = yen, aes(x = forward_30 - spot_rate, y = spot_30 - spot_rate))+
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, color = "red") +
+    theme_bw()
+```
