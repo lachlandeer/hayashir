@@ -1,5 +1,5 @@
 ---
-title: "Chapter 04: Multiple Equation GMM"
+title: "Chapter 05: Panel Data"
 author: "Lachlan Deer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
