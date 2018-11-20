@@ -61,6 +61,9 @@
     <li>
       <a href="../articles/chapter-03.html">Chapter 03: Single Equation GMM</a>
     </li>
+    <li>
+      <a href="../articles/chapter-04.html">Chapter 04: Multiple Equation GMM</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -89,7 +92,7 @@
       <h1>Chapter 02: Large Sample Theory</h1>
                         <h4 class="author">Lachlan Deer</h4>
             
-            <h4 class="date">2018-04-21</h4>
+            <h4 class="date">2018-11-20</h4>
       
       <small>Source: <a href="https://github.com/lachlandeer/hayashir/blob/master/vignettes/chapter-02.Rmd"><code>vignettes/chapter-02.Rmd</code></a></small>
       <div class="hidden name"><code>chapter-02.Rmd</code></div>
@@ -126,12 +129,12 @@
 <span class="co">#&gt; # A tibble: 6 x 7</span>
 <span class="co">#&gt;    year month inflation_1 inflation_3 tbill_1 tbill_3   cpi</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1  1950  2.00      - 3.55        1.13    1.10    1.13  23.5</span>
-<span class="co">#&gt; 2  1950  3.00        5.25        4.00    1.13    1.14  23.6</span>
-<span class="co">#&gt; 3  1950  4.00        1.69        4.49    1.12    1.14  23.6</span>
-<span class="co">#&gt; 4  1950  5.00        5.06        7.82    1.15    1.18  23.7</span>
-<span class="co">#&gt; 5  1950  6.00        6.72        9.43    1.16    1.17  23.8</span>
-<span class="co">#&gt; 6  1950  7.00       11.7         9.98    1.15    1.17  24.1</span></code></pre></div>
+<span class="co">#&gt; 1  1950     2       -3.55        1.13    1.10    1.13  23.5</span>
+<span class="co">#&gt; 2  1950     3        5.25        4.00    1.13    1.14  23.6</span>
+<span class="co">#&gt; 3  1950     4        1.69        4.49    1.12    1.14  23.6</span>
+<span class="co">#&gt; 4  1950     5        5.06        7.82    1.15    1.18  23.7</span>
+<span class="co">#&gt; 5  1950     6        6.72        9.43    1.16    1.17  23.8</span>
+<span class="co">#&gt; 6  1950     7       11.7         9.98    1.15    1.17  24.1</span></code></pre></div>
 </div>
 <div id="figure-2-3" class="section level2">
 <h2 class="hasAnchor">
@@ -144,14 +147,14 @@ mishkin2 &lt;-<span class="st"> </span>mishkin <span class="op">%&gt;%</span>
                        )
                 </code></pre></div>
 <p>Now we plot the data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mishkin2) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(time_period, tbill_<span class="dv">1</span>, <span class="dt">linetype =</span> <span class="st">"tbill_1"</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(time_period, cpi_inflation, <span class="dt">linetype =</span> <span class="st">"cpi_inflation"</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Date"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"percent"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_bw</a></span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">legend.position=</span><span class="st">"bottom"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_manual">scale_linetype_manual</a></span>(<span class="dt">name =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/element">element_blank</a></span>(), 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mishkin2) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(time_period, tbill_<span class="dv">1</span>, <span class="dt">linetype =</span> <span class="st">"tbill_1"</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(time_period, cpi_inflation, <span class="dt">linetype =</span> <span class="st">"cpi_inflation"</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Date"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"percent"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position=</span><span class="st">"bottom"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_linetype_manual</a></span>(<span class="dt">name =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(), 
                           <span class="dt">values =</span> <span class="kw">c</span>(<span class="dt">tbill_1 =</span> <span class="st">"solid"</span>, <span class="dt">cpi_inflation =</span> <span class="st">"dotted"</span>),
                           <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">"inflation rate"</span>, <span class="st">"1 month T-bill rate"</span>)
                           )
@@ -165,13 +168,13 @@ mishkin2 &lt;-<span class="st"> </span>mishkin <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mishkin2 &lt;-<span class="st"> </span>mishkin2 <span class="op">%&gt;%</span>
 <span class="st">                </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">real_rate =</span> tbill_<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>cpi_inflation)</code></pre></div>
 <p>And now plot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mishkin2) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(time_period, real_rate, <span class="dt">linetype =</span> <span class="st">"tbill_1"</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_abline">geom_hline</a></span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>, <span class="dt">color =</span> <span class="st">"red"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Date"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"percent"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_bw</a></span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">legend.position=</span><span class="st">"none"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mishkin2) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(time_period, real_rate, <span class="dt">linetype =</span> <span class="st">"tbill_1"</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>, <span class="dt">color =</span> <span class="st">"red"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Date"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"percent"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position=</span><span class="st">"none"</span>)
 <span class="co">#&gt; Don't know how to automatically pick scale for object of type yearmon. Defaulting to continuous.</span>
 <span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_path).</span></code></pre></div>
 <p><img src="chapter-02_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
@@ -188,12 +191,6 @@ mishkin2 &lt;-<span class="st"> </span>mishkin <span class="op">%&gt;%</span>
                    )
 <span class="co">#&gt; Warning: between() called on numeric vector with S3 class</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(skimr)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'skimr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:dplyr':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     contains, ends_with, everything, matches, num_range, one_of,</span>
-<span class="co">#&gt;     starts_with</span>
 <span class="kw"><a href="http://www.rdocumentation.org/packages/skimr/topics/skim">skim</a></span>(fama<span class="op">$</span>real_rate)
 <span class="co">#&gt; Skim summary statistics</span>
 <span class="co">#&gt; </span>
