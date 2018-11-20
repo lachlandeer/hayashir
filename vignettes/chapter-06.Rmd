@@ -29,7 +29,8 @@ library(dplyr) # data manipulation
 library(ggplot2) # plotting
 library(forecast) # time series plotting - Acf
 library(sandwich) # HAC standard errors
-library(lmtest)   
+library(lmtest)
+library(car)
 ```
 
 ## The Data
