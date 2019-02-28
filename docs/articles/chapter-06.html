@@ -98,7 +98,7 @@
       <h1>Chapter 06: Serial Correlation</h1>
                         <h4 class="author">Lachlan Deer</h4>
             
-            <h4 class="date">2018-11-20</h4>
+            <h4 class="date">2019-02-28</h4>
       
       <small>Source: <a href="https://github.com/lachlandeer/hayashir/blob/master/vignettes/chapter-06.Rmd"><code>vignettes/chapter-06.Rmd</code></a></small>
       <div class="hidden name"><code>chapter-06.Rmd</code></div>
@@ -167,9 +167,9 @@
 <h2 class="hasAnchor">
 <a href="#figure-6-1-forecast-error-yendollar" class="anchor"></a>Figure 6.1: Forecast Error: Yen/Dollar</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> yen, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> date, <span class="dt">y =</span> spot_<span class="dv">30</span> <span class="op">-</span><span class="st"> </span>forward_<span class="dv">30</span>))<span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype=</span><span class="st">"dashed"</span>, <span class="dt">color =</span> <span class="st">"red"</span>) <span class="op">+</span>
+<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> yen, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> date, <span class="dt">y =</span> spot_30 -<span class="st"> </span>forward_30))+
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>() +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype=</span><span class="st">"dashed"</span>, <span class="dt">color =</span> <span class="st">"red"</span>) +
 <span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()</code></pre></div>
 <p><img src="chapter-06_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
@@ -177,23 +177,23 @@
 <h2 class="hasAnchor">
 <a href="#figure-6-2-correlogram-of-s30---f-yendollar" class="anchor"></a>Figure 6.2: Correlogram of <span class="math inline">\(s30 - f\)</span>, Yen/Dollar</h2>
 <p>The <code>Acf</code> function from the <code>forecast</code> package will do what we need here:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/forecast/topics/Acf">Acf</a></span>(yen<span class="op">$</span>spot_<span class="dv">30</span> <span class="op">-</span><span class="st"> </span>yen<span class="op">$</span>forward_<span class="dv">30</span>, <span class="dt">lag.max =</span> <span class="dv">40</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/forecast/topics/Acf">Acf</a></span>(yen$spot_30 -<span class="st"> </span>yen$forward_30, <span class="dt">lag.max =</span> <span class="dv">40</span>)</code></pre></div>
 <p><img src="chapter-06_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
 <div id="figure-6-3-yendollar-spot-rate-jan-1975---dec-1989" class="section level2">
 <h2 class="hasAnchor">
 <a href="#figure-6-3-yendollar-spot-rate-jan-1975---dec-1989" class="anchor"></a>Figure 6.3: Yen/Dollar Spot Rate, Jan 1975 - Dec 1989</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> yen, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> date, <span class="dt">y =</span> spot_rate))<span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html">scale_x_date</a></span>(<span class="dt">date_breaks =</span> <span class="st">"3 years"</span>, <span class="dt">date_labels =</span>  <span class="st">"%m/%y"</span>) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> yen, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> date, <span class="dt">y =</span> spot_rate))+
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>() +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html">scale_x_date</a></span>(<span class="dt">date_breaks =</span> <span class="st">"3 years"</span>, <span class="dt">date_labels =</span>  <span class="st">"%m/%y"</span>) +
 <span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()</code></pre></div>
 <p><img src="chapter-06_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 </div>
 <div id="figure-6-4-plot-of-s30-against-f-yendollar" class="section level2">
 <h2 class="hasAnchor">
 <a href="#figure-6-4-plot-of-s30-against-f-yendollar" class="anchor"></a>Figure 6.4: Plot of <span class="math inline">\(s30\)</span> against <span class="math inline">\(f\)</span>, Yen/Dollar</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> yen, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> <span class="kw">log</span>(forward_<span class="dv">30</span>), <span class="dt">y =</span> <span class="kw">log</span>(spot_<span class="dv">30</span>)))<span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> yen, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> <span class="kw">log</span>(forward_30), <span class="dt">y =</span> <span class="kw">log</span>(spot_30)))+
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
 <span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()</code></pre></div>
 <p><img src="chapter-06_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
@@ -201,7 +201,7 @@
 <h2 class="hasAnchor">
 <a href="#table-6-2-regression-tests-for-market-efficiency" class="anchor"></a>Table 6.2: Regression Tests for Market Efficiency</h2>
 <p>For the Yen/Dollar:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mkt_eff &lt;-<span class="st"> </span><span class="kw">lm</span> (<span class="kw">I</span>(spot_<span class="dv">30</span> <span class="op">-</span><span class="st"> </span>spot_rate) <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(forward_<span class="dv">30</span> <span class="op">-</span><span class="st"> </span>spot_rate), <span class="dt">data =</span> yen)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mkt_eff &lt;-<span class="st"> </span><span class="kw">lm</span> (<span class="kw">I</span>(spot_30 -<span class="st"> </span>spot_rate) ~<span class="st"> </span><span class="kw">I</span>(forward_30 -<span class="st"> </span>spot_rate), <span class="dt">data =</span> yen)
 
 <span class="kw">summary</span>(mkt_eff)
 <span class="co">#&gt; </span>
@@ -256,9 +256,9 @@
 <div id="figure-6-5-plot-of-s30-s-against-f---s-yendollar" class="section level2">
 <h2 class="hasAnchor">
 <a href="#figure-6-5-plot-of-s30-s-against-f---s-yendollar" class="anchor"></a>Figure 6.5: Plot of <span class="math inline">\(s30-s\)</span> against <span class="math inline">\(f - s\)</span>, Yen/Dollar</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> yen, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> forward_<span class="dv">30</span> <span class="op">-</span><span class="st"> </span>spot_rate, <span class="dt">y =</span> spot_<span class="dv">30</span> <span class="op">-</span><span class="st"> </span>spot_rate))<span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span>(<span class="dt">method =</span> <span class="st">"lm"</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">color =</span> <span class="st">"red"</span>) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> yen, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> forward_30 -<span class="st"> </span>spot_rate, <span class="dt">y =</span> spot_30 -<span class="st"> </span>spot_rate))+
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span>(<span class="dt">method =</span> <span class="st">"lm"</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">color =</span> <span class="st">"red"</span>) +
 <span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>()</code></pre></div>
 <p><img src="chapter-06_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 </div>

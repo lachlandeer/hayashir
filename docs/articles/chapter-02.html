@@ -64,6 +64,12 @@
     <li>
       <a href="../articles/chapter-04.html">Chapter 04: Multiple Equation GMM</a>
     </li>
+    <li>
+      <a href="../articles/chapter-05.html">Chapter 05: Panel Data</a>
+    </li>
+    <li>
+      <a href="../articles/chapter-06.html">Chapter 06: Serial Correlation</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -92,7 +98,7 @@
       <h1>Chapter 02: Large Sample Theory</h1>
                         <h4 class="author">Lachlan Deer</h4>
             
-            <h4 class="date">2018-11-20</h4>
+            <h4 class="date">2019-02-28</h4>
       
       <small>Source: <a href="https://github.com/lachlandeer/hayashir/blob/master/vignettes/chapter-02.Rmd"><code>vignettes/chapter-02.Rmd</code></a></small>
       <div class="hidden name"><code>chapter-02.Rmd</code></div>
@@ -141,19 +147,19 @@
 <a href="#figure-2-3" class="anchor"></a>Figure 2.3</h2>
 <p>First we construct a date variable and then calculate CPI inflation The library <code>zoo</code> contains the function <code><a href="http://www.rdocumentation.org/packages/zoo/topics/yearmon">as.yearmon()</a></code> to construct dates containing only year and months.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-mishkin2 &lt;-<span class="st"> </span>mishkin <span class="op">%&gt;%</span>
-<span class="st">                </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">time_period =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/zoo/topics/yearmon">as.yearmon</a></span>(<span class="kw">paste</span>(year, month, <span class="dt">sep =</span> <span class="st">"-"</span>)),
-                       <span class="dt">cpi_inflation =</span> (cpi<span class="op">/</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(cpi) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span><span class="dv">12</span>
+mishkin2 &lt;-<span class="st"> </span>mishkin %&gt;%
+<span class="st">                </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">time_period =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/zoo/topics/yearmon">as.yearmon</a></span>(<span class="kw">paste</span>(year, month, <span class="dt">sep =</span> <span class="st">"-"</span>)),
+                       <span class="dt">cpi_inflation =</span> (cpi/<span class="kw"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(cpi) -<span class="st"> </span><span class="dv">1</span>) *<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span><span class="dv">12</span>
                        )
                 </code></pre></div>
 <p>Now we plot the data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mishkin2) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(time_period, tbill_<span class="dv">1</span>, <span class="dt">linetype =</span> <span class="st">"tbill_1"</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(time_period, cpi_inflation, <span class="dt">linetype =</span> <span class="st">"cpi_inflation"</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Date"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"percent"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position=</span><span class="st">"bottom"</span>) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mishkin2) +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(time_period, tbill_1, <span class="dt">linetype =</span> <span class="st">"tbill_1"</span>)) +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(time_period, cpi_inflation, <span class="dt">linetype =</span> <span class="st">"cpi_inflation"</span>)) +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Date"</span>) +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"percent"</span>) +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>() +<span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position=</span><span class="st">"bottom"</span>) +
 <span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_linetype_manual</a></span>(<span class="dt">name =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(), 
                           <span class="dt">values =</span> <span class="kw">c</span>(<span class="dt">tbill_1 =</span> <span class="st">"solid"</span>, <span class="dt">cpi_inflation =</span> <span class="st">"dotted"</span>),
                           <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">"inflation rate"</span>, <span class="st">"1 month T-bill rate"</span>)
@@ -165,15 +171,15 @@ mishkin2 &lt;-<span class="st"> </span>mishkin <span class="op">%&gt;%</span>
 <h2 class="hasAnchor">
 <a href="#figure-2-4" class="anchor"></a>Figure 2.4</h2>
 <p>Compute real interest rate:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mishkin2 &lt;-<span class="st"> </span>mishkin2 <span class="op">%&gt;%</span>
-<span class="st">                </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">real_rate =</span> tbill_<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>cpi_inflation)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mishkin2 &lt;-<span class="st"> </span>mishkin2 %&gt;%
+<span class="st">                </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">real_rate =</span> tbill_1 -<span class="st"> </span>cpi_inflation)</code></pre></div>
 <p>And now plot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mishkin2) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(time_period, real_rate, <span class="dt">linetype =</span> <span class="st">"tbill_1"</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>, <span class="dt">color =</span> <span class="st">"red"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Date"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"percent"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>() <span class="op">+</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mishkin2) +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(time_period, real_rate, <span class="dt">linetype =</span> <span class="st">"tbill_1"</span>)) +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">"dashed"</span>, <span class="dt">color =</span> <span class="st">"red"</span>) +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Date"</span>) +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"percent"</span>) +
+<span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>() +<span class="st"> </span>
 <span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position=</span><span class="st">"none"</span>)
 <span class="co">#&gt; Don't know how to automatically pick scale for object of type yearmon. Defaulting to continuous.</span>
 <span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_path).</span></code></pre></div>
@@ -183,15 +189,15 @@ mishkin2 &lt;-<span class="st"> </span>mishkin <span class="op">%&gt;%</span>
 <h2 class="hasAnchor">
 <a href="#table-2-1" class="anchor"></a>Table 2.1</h2>
 <p>First we subset the data. The relevant Date range is January 1953 to July 1971.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fama &lt;-<span class="st"> </span>mishkin2 <span class="op">%&gt;%</span>
-<span class="st">            </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/between.html">between</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/zoo/topics/yearmon">as.yearmon</a></span>(time_period), 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fama &lt;-<span class="st"> </span>mishkin2 %&gt;%
+<span class="st">            </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/between.html">between</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/zoo/topics/yearmon">as.yearmon</a></span>(time_period), 
                            <span class="kw"><a href="http://www.rdocumentation.org/packages/zoo/topics/yearmon">as.yearmon</a></span>(<span class="st">"Jan 1953"</span>), 
                            <span class="kw"><a href="http://www.rdocumentation.org/packages/zoo/topics/yearmon">as.yearmon</a></span>(<span class="st">"Jul 1971"</span>)
                            )
                    )
 <span class="co">#&gt; Warning: between() called on numeric vector with S3 class</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(skimr)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/skimr/topics/skim">skim</a></span>(fama<span class="op">$</span>real_rate)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/skimr/topics/skim">skim</a></span>(fama$real_rate)
 <span class="co">#&gt; Skim summary statistics</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Variable type: numeric </span>
@@ -200,7 +206,7 @@ mishkin2 &lt;-<span class="st"> </span>mishkin <span class="op">%&gt;%</span>
 <span class="co">#&gt;  p100     hist</span>
 <span class="co">#&gt;  8.08 ▁▁▃▆▇▆▂▁</span></code></pre></div>
 <p>Then the ACF</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">acf</span>(fama<span class="op">$</span>real_rate, <span class="dt">lag.max =</span> <span class="dv">12</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">acf</span>(fama$real_rate, <span class="dt">lag.max =</span> <span class="dv">12</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Autocorrelations of series 'fama$real_rate', by lag</span>
 <span class="co">#&gt; </span>
@@ -211,7 +217,7 @@ mishkin2 &lt;-<span class="st"> </span>mishkin <span class="op">%&gt;%</span>
 <p>Then the Ljung Box Q tests (use the <code>portes</code> package for more flexibility)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(portes)
 <span class="co">#&gt; Loading required package: parallel</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/portes/topics/LjungBox">LjungBox</a></span>(fama<span class="op">$</span>real_rate, <span class="dt">lags =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/portes/topics/LjungBox">LjungBox</a></span>(fama$real_rate, <span class="dt">lags =</span> <span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>))
 <span class="co">#&gt;  lags statistic df     p-value</span>
 <span class="co">#&gt;     1  2.481488  1 0.115193236</span>
 <span class="co">#&gt;     2  9.242763  2 0.009839194</span>
@@ -229,7 +235,7 @@ mishkin2 &lt;-<span class="st"> </span>mishkin <span class="op">%&gt;%</span>
 <div id="is-the-nominal-interest-rate-the-optimal-predictor" class="section level2">
 <h2 class="hasAnchor">
 <a href="#is-the-nominal-interest-rate-the-optimal-predictor" class="anchor"></a>Is the Nominal Interest Rate the Optimal Predictor?</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(cpi_inflation <span class="op">~</span><span class="st"> </span>tbill_<span class="dv">1</span>, <span class="dt">data =</span> fama)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(cpi_inflation ~<span class="st"> </span>tbill_1, <span class="dt">data =</span> fama)
 <span class="kw">summary</span>(model1)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>

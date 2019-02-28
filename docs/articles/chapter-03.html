@@ -64,6 +64,12 @@
     <li>
       <a href="../articles/chapter-04.html">Chapter 04: Multiple Equation GMM</a>
     </li>
+    <li>
+      <a href="../articles/chapter-05.html">Chapter 05: Panel Data</a>
+    </li>
+    <li>
+      <a href="../articles/chapter-06.html">Chapter 06: Serial Correlation</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -92,7 +98,7 @@
       <h1>Chapter 03: Single Equation GMM</h1>
                         <h4 class="author">Lachlan Deer</h4>
             
-            <h4 class="date">2018-11-20</h4>
+            <h4 class="date">2019-02-28</h4>
       
       <small>Source: <a href="https://github.com/lachlandeer/hayashir/blob/master/vignettes/chapter-03.Rmd"><code>vignettes/chapter-03.Rmd</code></a></small>
       <div class="hidden name"><code>chapter-03.Rmd</code></div>
@@ -118,7 +124,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Please cite as:</span>
 <span class="co">#&gt;  Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.</span>
-<span class="co">#&gt;  R package version 5.2.1. https://CRAN.R-project.org/package=stargazer</span>
+<span class="co">#&gt;  R package version 5.2.2. https://CRAN.R-project.org/package=stargazer</span>
 <span class="kw">library</span>(AER)
 <span class="co">#&gt; Loading required package: car</span>
 <span class="co">#&gt; Loading required package: carData</span>
@@ -172,13 +178,13 @@
 <h2 class="hasAnchor">
 <a href="#table-3-1" class="anchor"></a>Table 3.1</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-to_summarize &lt;-<span class="st"> </span>griliches <span class="op">%&gt;%</span>
-<span class="st">                    </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(age, education, log_wage, kww_score, iq_score, experience)
+to_summarize &lt;-<span class="st"> </span>griliches %&gt;%
+<span class="st">                    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(age, education, log_wage, kww_score, iq_score, experience)
 
 <span class="kw"><a href="http://www.rdocumentation.org/packages/stargazer/topics/stargazer">stargazer</a></span>(<span class="kw">as.data.frame</span>(to_summarize), <span class="dt">type =</span> <span class="st">"html"</span>)</code></pre></div>
 <table style="text-align:center" class="table">
 <tr>
-<td colspan="6" style="border-bottom: 1px solid black">
+<td colspan="8" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
@@ -198,11 +204,17 @@ St. Dev.
 Min
 </td>
 <td>
+Pctl(25)
+</td>
+<td>
+Pctl(75)
+</td>
+<td>
 Max
 </td>
 </tr>
 <tr>
-<td colspan="6" style="border-bottom: 1px solid black">
+<td colspan="8" style="border-bottom: 1px solid black">
 </td>
 </tr>
 <tr>
@@ -220,6 +232,12 @@ age
 </td>
 <td>
 16
+</td>
+<td>
+20
+</td>
+<td>
+24
 </td>
 <td>
 30
@@ -242,6 +260,12 @@ education
 9
 </td>
 <td>
+12
+</td>
+<td>
+16
+</td>
+<td>
 18
 </td>
 </tr>
@@ -260,6 +284,12 @@ log_wage
 </td>
 <td>
 4.605
+</td>
+<td>
+5.380
+</td>
+<td>
+5.991
 </td>
 <td>
 7.051
@@ -282,6 +312,12 @@ kww_score
 12
 </td>
 <td>
+32
+</td>
+<td>
+41
+</td>
+<td>
 56
 </td>
 </tr>
@@ -300,6 +336,12 @@ iq_score
 </td>
 <td>
 54
+</td>
+<td>
+95.2
+</td>
+<td>
+113.8
 </td>
 <td>
 145
@@ -322,11 +364,17 @@ experience
 0.000
 </td>
 <td>
+0.282
+</td>
+<td>
+2.440
+</td>
+<td>
 11.444
 </td>
 </tr>
 <tr>
-<td colspan="6" style="border-bottom: 1px solid black">
+<td colspan="8" style="border-bottom: 1px solid black">
 </td>
 </tr>
 </table>
@@ -336,21 +384,21 @@ experience
 <h2 class="hasAnchor">
 <a href="#table-3-2" class="anchor"></a>Table 3.2</h2>
 <p>First we estimate the three models. We again expect slightly different results because (i) we have different data than Griliches; and (ii) the controls are slightly different - due to data availability.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(log_wage <span class="op">~</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span>
-<span class="st">                 </span>experience <span class="op">+</span><span class="st"> </span>tenure <span class="op">+</span>
-<span class="st">                 </span>southern_residence <span class="op">+</span><span class="st"> </span>lives_metro <span class="op">+</span><span class="st"> </span>
-<span class="st">                 </span>age <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(age<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>married, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(log_wage ~<span class="st"> </span>education +<span class="st"> </span>
+<span class="st">                 </span>experience +<span class="st"> </span>tenure +
+<span class="st">                 </span>southern_residence +<span class="st"> </span>lives_metro +<span class="st"> </span>
+<span class="st">                 </span>age +<span class="st"> </span><span class="kw">I</span>(age^<span class="dv">2</span>) +<span class="st"> </span>married, 
                  <span class="dt">data =</span> griliches)
-model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(log_wage <span class="op">~</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span>iq_score <span class="op">+</span><span class="st"> </span>
-<span class="st">                 </span>experience <span class="op">+</span><span class="st"> </span>tenure <span class="op">+</span>
-<span class="st">                 </span>southern_residence <span class="op">+</span><span class="st"> </span>lives_metro <span class="op">+</span><span class="st"> </span>
-<span class="st">                 </span>age <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(age<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>married, 
+model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(log_wage ~<span class="st"> </span>education +<span class="st"> </span>iq_score +<span class="st"> </span>
+<span class="st">                 </span>experience +<span class="st"> </span>tenure +
+<span class="st">                 </span>southern_residence +<span class="st"> </span>lives_metro +<span class="st"> </span>
+<span class="st">                 </span>age +<span class="st"> </span><span class="kw">I</span>(age^<span class="dv">2</span>) +<span class="st"> </span>married, 
                  <span class="dt">data =</span> griliches)
-model3 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/AER/topics/ivreg">ivreg</a></span>(log_wage <span class="op">~</span><span class="st"> </span>education <span class="op">+</span><span class="st"> </span>iq_score <span class="op">+</span><span class="st"> </span>
-<span class="st">                     </span>experience <span class="op">+</span><span class="st"> </span>tenure <span class="op">+</span>
-<span class="st">                     </span>southern_residence <span class="op">+</span><span class="st"> </span>lives_metro <span class="op">+</span><span class="st">  </span>
-<span class="st">                     </span>age <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(age<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>married <span class="op">|</span><span class="st"> </span>
-<span class="st">                     </span>. <span class="op">-</span>iq_score <span class="op">+</span><span class="st"> </span>kww_score <span class="op">+</span><span class="st"> </span>mothers_educ,
+model3 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/AER/topics/ivreg">ivreg</a></span>(log_wage ~<span class="st"> </span>education +<span class="st"> </span>iq_score +<span class="st"> </span>
+<span class="st">                     </span>experience +<span class="st"> </span>tenure +
+<span class="st">                     </span>southern_residence +<span class="st"> </span>lives_metro +<span class="st">  </span>
+<span class="st">                     </span>age +<span class="st"> </span><span class="kw">I</span>(age^<span class="dv">2</span>) +<span class="st"> </span>married |<span class="st"> </span>
+<span class="st">                     </span>. -iq_score +<span class="st"> </span>kww_score +<span class="st"> </span>mothers_educ,
                     <span class="dt">data =</span> griliches)</code></pre></div>
 <p>Let’s put them all into a table, we use Std Errors in parentheses, <em>not t-stats</em>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
