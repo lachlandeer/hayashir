@@ -4,7 +4,7 @@ author: "Lachlan Deer"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Chapter 01: Finite Sample Properties}
+  %\VignetteIndexEntry{Chapter 05: Panel Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
