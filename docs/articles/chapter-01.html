@@ -70,6 +70,12 @@
     <li>
       <a href="../articles/chapter-06.html">Chapter 06: Serial Correlation</a>
     </li>
+    <li>
+      <a href="../articles/chapter-07.html">Chapter 07: Extremum Estimators</a>
+    </li>
+    <li>
+      <a href="../articles/chapter-08.html">Chapter 08: Examples of Maximum Likelihood</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -167,8 +173,8 @@
 <div id="the-unrestricted-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-unrestricted-model" class="anchor"></a>The Unrestricted Model</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">unrestricted_ls &lt;-<span class="st"> </span><span class="kw">log</span>(total_cost) ~<span class="st"> </span><span class="kw">log</span>(output) +<span class="st"> </span>
-<span class="st">                    </span><span class="kw">log</span>(price_labor) +<span class="st"> </span><span class="kw">log</span>(price_capital) +<span class="st"> </span><span class="kw">log</span>(price_fuel)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">unrestricted_ls &lt;-<span class="st"> </span><span class="kw">log</span>(total_cost) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(output) <span class="op">+</span><span class="st"> </span>
+<span class="st">                    </span><span class="kw">log</span>(price_labor) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_capital) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_fuel)
 
 model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(unrestricted_ls, <span class="dt">data =</span> nerlove)
 <span class="kw">summary</span>(model1)
@@ -194,7 +200,7 @@ model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(unrestricted_ls,
 <span class="co">#&gt; Multiple R-squared:  0.926,  Adjusted R-squared:  0.9238 </span>
 <span class="co">#&gt; F-statistic: 437.7 on 4 and 140 DF,  p-value: &lt; 2.2e-16</span></code></pre></div>
 <p>Scale Coefficient:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">return_to_scale &lt;-<span class="st"> </span><span class="dv">1</span> /<span class="st"> </span>model1$coefficients[<span class="dv">2</span>]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">return_to_scale &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>model1<span class="op">$</span>coefficients[<span class="dv">2</span>]
 <span class="kw">print</span>(return_to_scale)
 <span class="co">#&gt; log(output) </span>
 <span class="co">#&gt;    1.388129</span></code></pre></div>
@@ -220,14 +226,14 @@ model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(unrestricted_ls,
 test_results &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/linearHypothesis">linearHypothesis</a></span>(model1, <span class="kw">c</span>(<span class="st">"log(price_capital) = 0"</span>))
 
 <span class="co"># ie. same as above</span>
-t_stat &lt;-<span class="st"> </span><span class="kw">sqrt</span>(test_results$F)</code></pre></div>
+t_stat &lt;-<span class="st"> </span><span class="kw">sqrt</span>(test_results<span class="op">$</span>F)</code></pre></div>
 </div>
 <div id="the-restricted-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-restricted-model" class="anchor"></a>The Restricted Model</h3>
 <p>Following the book:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">restricted_ls &lt;-<span class="st"> </span><span class="kw">log</span>(total_cost/price_fuel) ~<span class="st"> </span><span class="kw">log</span>(output) +
-<span class="st">                        </span><span class="kw">log</span>(price_labor/price_fuel) +<span class="st"> </span><span class="kw">log</span>(price_capital /<span class="st"> </span>price_fuel) 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">restricted_ls &lt;-<span class="st"> </span><span class="kw">log</span>(total_cost<span class="op">/</span>price_fuel) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(output) <span class="op">+</span>
+<span class="st">                        </span><span class="kw">log</span>(price_labor<span class="op">/</span>price_fuel) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_capital <span class="op">/</span><span class="st"> </span>price_fuel) 
 
 model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(restricted_ls, <span class="dt">data =</span> nerlove)
 <span class="kw">summary</span>(model2)
@@ -274,23 +280,23 @@ model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(restricted_ls, <
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">anova_model1 &lt;-<span class="st"> </span><span class="kw">anova</span>(model1)
 final_row_u &lt;-<span class="st"> </span><span class="kw">nrow</span>(<span class="kw">nrow</span>(anova_model1))
 
-SSR_u &lt;-<span class="st"> </span>anova_model1$<span class="st">`</span><span class="dt">Sum Sq</span><span class="st">`</span>[final_row_u]
-df_resid_u &lt;-<span class="st"> </span>anova_model1$Df[final_row_u]</code></pre></div>
+SSR_u &lt;-<span class="st"> </span>anova_model1<span class="op">$</span><span class="st">`</span><span class="dt">Sum Sq</span><span class="st">`</span>[final_row_u]
+df_resid_u &lt;-<span class="st"> </span>anova_model1<span class="op">$</span>Df[final_row_u]</code></pre></div>
 <p>and doing the same for the for the restricted model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">anova_model2 &lt;-<span class="st"> </span><span class="kw">anova</span>(model2)
 final_row_r &lt;-<span class="st"> </span><span class="kw">nrow</span>(<span class="kw">nrow</span>(anova_model2))
 
-SSR_r &lt;-<span class="st"> </span>anova_model2$<span class="st">`</span><span class="dt">Sum Sq</span><span class="st">`</span>[final_row_r]
-df_resid_r &lt;-<span class="st"> </span>anova_model2$Df[final_row_r]</code></pre></div>
+SSR_r &lt;-<span class="st"> </span>anova_model2<span class="op">$</span><span class="st">`</span><span class="dt">Sum Sq</span><span class="st">`</span>[final_row_r]
+df_resid_r &lt;-<span class="st"> </span>anova_model2<span class="op">$</span>Df[final_row_r]</code></pre></div>
 <p>Then our F-stat can be computed as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f_stat &lt;-<span class="st"> </span>( (SSR_r -<span class="st"> </span>SSR_u) /<span class="st"> </span>(df_resid_r -<span class="st"> </span>df_resid_u)) /<span class="st"> </span>(SSR_u /<span class="st"> </span>(df_resid_u))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f_stat &lt;-<span class="st"> </span>( (SSR_r <span class="op">-</span><span class="st"> </span>SSR_u) <span class="op">/</span><span class="st"> </span>(df_resid_r <span class="op">-</span><span class="st"> </span>df_resid_u)) <span class="op">/</span><span class="st"> </span>(SSR_u <span class="op">/</span><span class="st"> </span>(df_resid_u))
 <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">"F stat is:"</span>, f_stat))
 <span class="co">#&gt; [1] "F stat is: "</span></code></pre></div>
 <p>Which has a p-value of</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pf</span>(f_stat, df_resid_r -<span class="st"> </span>df_resid_u, df_resid_u, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pf</span>(f_stat, df_resid_r <span class="op">-</span><span class="st"> </span>df_resid_u, df_resid_u, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)
 <span class="co">#&gt; numeric(0)</span></code></pre></div>
 <p>Alternatively, we can look at the F-stat versus a critical value.# The critical value at 5% is</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qf</span>(<span class="fl">0.05</span>, df_resid_r -<span class="st"> </span>df_resid_u, df_resid_u, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qf</span>(<span class="fl">0.05</span>, df_resid_r <span class="op">-</span><span class="st"> </span>df_resid_u, df_resid_u, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)
 <span class="co">#&gt; numeric(0)</span></code></pre></div>
 </div>
 </div>
@@ -316,8 +322,8 @@ df_resid_r &lt;-<span class="st"> </span>anova_model2$Df[final_row_r]</code></pr
 <h2 class="hasAnchor">
 <a href="#detour-a-cautionary-note-on-r2" class="anchor"></a>Detour: a cautionary note on <span class="math inline">\(R^2\)</span>
 </h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scale_effect &lt;-<span class="st"> </span><span class="kw">log</span>(total_cost /<span class="st"> </span>output) ~<span class="st"> </span><span class="kw">log</span>(output ) +<span class="st"> </span>
-<span class="st">                    </span><span class="kw">log</span>(price_labor ) +<span class="st"> </span><span class="kw">log</span>(price_capital ) +<span class="st"> </span><span class="kw">log</span>(price_fuel)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scale_effect &lt;-<span class="st"> </span><span class="kw">log</span>(total_cost <span class="op">/</span><span class="st"> </span>output) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(output ) <span class="op">+</span><span class="st"> </span>
+<span class="st">                    </span><span class="kw">log</span>(price_labor ) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_capital ) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_fuel)
 
 model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(scale_effect, <span class="dt">data =</span> nerlove)
 <span class="kw">summary</span>(model3)
@@ -364,7 +370,7 @@ model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(scale_effect, <s
 <p>Which again returns an F-stat. We can map that into a t-stat as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f_stat2 &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/car/topics/linearHypothesis">linearHypothesis</a></span>(model2, <span class="st">"log(output) = 1"</span>)
 
-t_stat2 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(f_stat2$F[<span class="dv">2</span>])
+t_stat2 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(f_stat2<span class="op">$</span>F[<span class="dv">2</span>])
 
 <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">"t stat is:"</span>, t_stat2))
 <span class="co">#&gt; [1] "t stat is: 16.0195576357841"</span></code></pre></div>

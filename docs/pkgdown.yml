@@ -1,4 +1,4 @@
-pandoc: 1.17.2
+pandoc: 1.19.2.1
 pkgdown: 0.1.0.9000
 pkgdown_sha: 4e194be97890ace7225932cbc3b4380085aedcf8
 articles:
@@ -8,6 +8,8 @@ articles:
   chapter-04: chapter-04.html
   chapter-05: chapter-05.html
   chapter-06: chapter-06.html
+  chapter-07: chapter-07.html
+  chapter-08: chapter-08.html
 urls:
   reference: http://lachlandeer.github.io/hayashir/reference
   article: http://lachlandeer.github.io/hayashir/articles

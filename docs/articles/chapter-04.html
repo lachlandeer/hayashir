@@ -70,6 +70,12 @@
     <li>
       <a href="../articles/chapter-06.html">Chapter 06: Serial Correlation</a>
     </li>
+    <li>
+      <a href="../articles/chapter-07.html">Chapter 07: Extremum Estimators</a>
+    </li>
+    <li>
+      <a href="../articles/chapter-08.html">Chapter 08: Examples of Maximum Likelihood</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -177,9 +183,9 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># assign the greene data to the object 'df'</span>
 df &lt;-<span class="st"> </span>greene
 
-df %&gt;%
-<span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">output =</span> output /<span class="st"> </span><span class="fl">1e3</span>) %&gt;%
-<span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(output, labor_share, capital_share, fuel_share) %&gt;%
+df <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">output =</span> output <span class="op">/</span><span class="st"> </span><span class="fl">1e3</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(output, labor_share, capital_share, fuel_share) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/skimr/topics/skim">skim</a></span>()
 <span class="co">#&gt; Skim summary statistics</span>
 <span class="co">#&gt;  n obs: 99 </span>
@@ -202,8 +208,8 @@ df %&gt;%
 <a href="#table-4-4-regression-parameters-from-2-regression-set-up" class="anchor"></a>Table 4.4: Regression parameters from 2 regression set up</h2>
 <p>Following the text, the two equations we want to estimate are:</p>
 <p>First, specify the equations we want to estimate:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eq1 &lt;-<span class="st"> </span>labor_share ~<span class="st"> </span><span class="kw">log</span>(price_labor /<span class="st"> </span>price_fuel) +<span class="st"> </span><span class="kw">log</span>(price_capital /<span class="st"> </span>price_fuel) +<span class="st"> </span><span class="kw">log</span>(output) 
-eq2 &lt;-<span class="st"> </span>capital_share ~<span class="st"> </span><span class="kw">log</span>(price_labor /<span class="st"> </span>price_fuel) +<span class="st"> </span><span class="kw">log</span>(price_capital /<span class="st"> </span>price_fuel) +<span class="st"> </span><span class="kw">log</span>(output)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eq1 &lt;-<span class="st"> </span>labor_share <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(price_labor <span class="op">/</span><span class="st"> </span>price_fuel) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_capital <span class="op">/</span><span class="st"> </span>price_fuel) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(output) 
+eq2 &lt;-<span class="st"> </span>capital_share <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(price_labor <span class="op">/</span><span class="st"> </span>price_fuel) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_capital <span class="op">/</span><span class="st"> </span>price_fuel) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(output)</code></pre></div>
 <p>As Hayashi tells us, the unique symmetry restriction is then</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">restrict &lt;-<span class="st"> </span><span class="kw">c</span>(
     <span class="st">"labor_log(price_capital/price_fuel) = capital_log(price_labor/price_fuel)"</span>
@@ -290,21 +296,21 @@ eq2 &lt;-<span class="st"> </span>capital_share ~<span class="st"> </span><span 
 \hat{\gamma}_{33} = \hat{\gamma}_{11} + 2 \hat{\gamma}_{12} + \hat{\gamma}_{22}
 \]</span></p>
 <p>So that</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gamma_11 &lt;-<span class="st"> </span>sur_results$coefficients[<span class="st">"labor_log(price_labor/price_fuel)"</span>]
-gamma_12 &lt;-<span class="st"> </span>sur_results$coefficients[<span class="st">"labor_log(price_capital/price_fuel)"</span>]
-gamma_22 &lt;-<span class="st"> </span>sur_results$coefficients[<span class="st">"capital_log(price_capital/price_fuel)"</span>]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gamma_<span class="dv">11</span> &lt;-<span class="st"> </span>sur_results<span class="op">$</span>coefficients[<span class="st">"labor_log(price_labor/price_fuel)"</span>]
+gamma_<span class="dv">12</span> &lt;-<span class="st"> </span>sur_results<span class="op">$</span>coefficients[<span class="st">"labor_log(price_capital/price_fuel)"</span>]
+gamma_<span class="dv">22</span> &lt;-<span class="st"> </span>sur_results<span class="op">$</span>coefficients[<span class="st">"capital_log(price_capital/price_fuel)"</span>]
 
-gamma_33 &lt;-<span class="st"> </span>gamma_11 +<span class="st"> </span><span class="dv">2</span> *<span class="st"> </span>gamma_12 +<span class="st"> </span>gamma_22
+gamma_<span class="dv">33</span> &lt;-<span class="st"> </span>gamma_<span class="dv">11</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>gamma_<span class="dv">12</span> <span class="op">+</span><span class="st"> </span>gamma_<span class="dv">22</span>
 
-<span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">"gamma_33 is: "</span>, <span class="kw">round</span>(gamma_33,<span class="dv">3</span>)))
+<span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">"gamma_33 is: "</span>, <span class="kw">round</span>(gamma_<span class="dv">33</span>,<span class="dv">3</span>)))
 <span class="co">#&gt; [1] "gamma_33 is:  0.159"</span></code></pre></div>
 <div id="getting-the-covariance-matrix-sigma-py-pooled-ols" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-the-covariance-matrix-sigma-py-pooled-ols" class="anchor"></a>Getting the Covariance Matrix, <span class="math inline">\(\Sigma\)</span> py pooled OLS</h3>
 <p>Run the three regressions via pooled OLS. The equations are:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eq1a &lt;-<span class="st"> </span>labor_share ~<span class="st"> </span><span class="kw">log</span>(price_labor) +<span class="st"> </span><span class="kw">log</span>(price_capital) +<span class="st"> </span><span class="kw">log</span>(price_fuel) +<span class="st"> </span><span class="kw">log</span>(output) 
-eq2a &lt;-<span class="st"> </span>capital_share ~<span class="st"> </span><span class="kw">log</span>(price_labor) +<span class="st"> </span><span class="kw">log</span>(price_capital) +<span class="st"> </span><span class="kw">log</span>(price_fuel) +<span class="st"> </span><span class="kw">log</span>(output)
-eq3a &lt;-<span class="st"> </span>fuel_share ~<span class="st"> </span><span class="kw">log</span>(price_labor) +<span class="st"> </span><span class="kw">log</span>(price_capital) +<span class="st"> </span><span class="kw">log</span>(price_fuel) +<span class="st"> </span><span class="kw">log</span>(output)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eq1a &lt;-<span class="st"> </span>labor_share <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(price_labor) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_capital) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_fuel) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(output) 
+eq2a &lt;-<span class="st"> </span>capital_share <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(price_labor) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_capital) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_fuel) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(output)
+eq3a &lt;-<span class="st"> </span>fuel_share <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(price_labor) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_capital) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(price_fuel) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(output)</code></pre></div>
 <p>Then estimate:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pooled_ols &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/systemfit/topics/systemfit">systemfit</a></span>(<span class="kw">list</span>(<span class="dt">labor =</span> eq1a, <span class="dt">capital =</span> eq2a, <span class="dt">fuel =</span> eq3a), 
                          <span class="dt">method =</span> <span class="st">"OLS"</span>, 
@@ -391,7 +397,7 @@ eq3a &lt;-<span class="st"> </span>fuel_share ~<span class="st"> </span><span cl
 <span class="co">#&gt; SSR: 0.386536 MSE: 0.004112 Root MSE: 0.064126 </span>
 <span class="co">#&gt; Multiple R-Squared: 0.536604 Adjusted R-Squared: 0.516885</span></code></pre></div>
 <p>And extract the residual covariance matrix:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pooled_ols$residCov
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pooled_ols<span class="op">$</span>residCov
 <span class="co">#&gt;                 labor       capital         fuel</span>
 <span class="co">#&gt; labor    0.0016987469 -0.0000288179 -0.001669929</span>
 <span class="co">#&gt; capital -0.0000288179  0.0024709732 -0.002442155</span>
@@ -407,16 +413,16 @@ eq3a &lt;-<span class="st"> </span>fuel_share ~<span class="st"> </span><span cl
 \]</span></p>
 <p>So we calculate these for each data point, and then find the mean in our data. Let’s do this for the labor-capital elasticity, <span class="math inline">\(\eta_{12}\)</span>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the coefficient we are after</span>
-gamma_12 &lt;-<span class="st"> </span>sur_results$coefficients[<span class="st">"labor_log(price_capital/price_fuel)"</span>]
+gamma_<span class="dv">12</span> &lt;-<span class="st"> </span>sur_results<span class="op">$</span>coefficients[<span class="st">"labor_log(price_capital/price_fuel)"</span>]
 
 <span class="co"># the fitted values</span>
 fitted_vals &lt;-<span class="st"> </span><span class="kw">fitted</span>( sur_results)
 
-elasticity &lt;-<span class="st"> </span>fitted_vals %&gt;%
-<span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">eta_12 =</span> (gamma_12 +<span class="st"> </span>(labor *<span class="st"> </span>capital)) /<span class="st"> </span>(labor *<span class="st"> </span>capital) ) %&gt;%
-<span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">eta_12 =</span> <span class="kw">mean</span>(eta_12)) 
+elasticity &lt;-<span class="st"> </span>fitted_vals <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">eta_12 =</span> (gamma_<span class="dv">12</span> <span class="op">+</span><span class="st"> </span>(labor <span class="op">*</span><span class="st"> </span>capital)) <span class="op">/</span><span class="st"> </span>(labor <span class="op">*</span><span class="st"> </span>capital) ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">eta_12 =</span> <span class="kw">mean</span>(eta_<span class="dv">12</span>)) 
 
-<span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">"Capital-Labor elasticity is: "</span>, <span class="kw">round</span>(elasticity$eta_12, <span class="dv">2</span>)))
+<span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">"Capital-Labor elasticity is: "</span>, <span class="kw">round</span>(elasticity<span class="op">$</span>eta_<span class="dv">12</span>, <span class="dv">2</span>)))
 <span class="co">#&gt; [1] "Capital-Labor elasticity is: 0.17"</span></code></pre></div>
 </div>
 </div>
