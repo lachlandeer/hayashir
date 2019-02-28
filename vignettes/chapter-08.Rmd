@@ -1,0 +1,19 @@
+---
+title: "Chapter 08: Examples of Maximum Likelihood"
+author: "Lachlan Deer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Chapter 08: Examples of Maximum Likelihood}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+There is *no* empirical section in the text of Chapter 08.
