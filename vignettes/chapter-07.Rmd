@@ -1,0 +1,20 @@
+---
+title: "Chapter 07: Extremum Estimators"
+author: "Lachlan Deer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Chapter 07: Extremum Estimators}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+There is *no* empirical section in the text of Chapter 07.
+
