@@ -1,6 +1,6 @@
-pandoc: 1.19.2.1
-pkgdown: 0.1.0.9000
-pkgdown_sha: 4e194be97890ace7225932cbc3b4380085aedcf8
+pandoc: 1.17.2
+pkgdown: 1.3.0
+pkgdown_sha: ~
 articles:
   chapter-01: chapter-01.html
   chapter-02: chapter-02.html
